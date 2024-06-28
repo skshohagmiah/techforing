@@ -1,6 +1,6 @@
 import express from "express";
 import Job from "../models/job.js";
-import { authenticateToken } from "../middleware.js";
+import { authenticateToken } from "../authenticateMiddleware.js";
 
 const router = express.Router();
 
