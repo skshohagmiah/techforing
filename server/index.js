@@ -13,10 +13,11 @@ const port = process.env.PORT || 5000;
 app.use(
   cors({
     origin: "https://techforing-client.vercel.app",
-    allowedHeaders: "*",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+
 app.use(express.json());
 
 // MongoDB Connection
