@@ -1,9 +1,9 @@
-import express from 'express';
-import cors from 'cors';
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-import jobRoutes from './routes/jobsRoutes.js'; 
-import authRoutes from './routes/authRoutes.js'; 
+import express from "express";
+import cors from "cors";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import jobRoutes from "./routes/jobsRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
 
 dotenv.config();
 
@@ -13,13 +13,13 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// MongoDB Connection 
+// MongoDB Connection
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URI);
-    console.log('Connected to MongoDB');
+    console.log("Connected to MongoDB");
   } catch (err) {
-    console.error('MongoDB connection error:', err);
+    console.error("MongoDB connection error:", err);
     process.exit(1);
   }
 };
@@ -27,13 +27,16 @@ const connectDB = async () => {
 connectDB();
 
 // Routes
-app.use('/api/jobs', jobRoutes); 
-app.use('/api/auth', authRoutes); 
+app.get("/", (req, res) => {
+  res.send("express server running on vercel");
+});
+app.use("/api/jobs", jobRoutes);
+app.use("/api/auth", authRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).json({ message: 'Internal Server Error' });
+  res.status(500).json({ message: "Internal Server Error" });
 });
 
 app.listen(port, () => {
